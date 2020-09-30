@@ -12,6 +12,12 @@ require 'json'
 
 enable :sessions
 
+helpers do
+  def current_user
+    User.find_by(id: session[:user])
+  end
+end
+
 get '/' do
   erb :index
 end
@@ -20,8 +26,34 @@ get '/signin' do
   erb :signin
 end
 
+post '/signin' do
+  user = User.find_by(name: params[:name])
+  if user && user.authenticate(params[:password])
+    session[:user] = user.id
+  end
+  redirect '/'
+end
+
 get '/signup' do
   erb :signup
+end
+
+post '/signup' do
+if params[:image]
+    image = params[:image][:tempfile]
+    upload = Cloudinary::Uploader.upload(image.path)
+    img_url = upload['url']
+  end
+
+  @user = User.create(
+    name: params[:name]
+    password: params[:password]
+    password_confirmation: params[:password_confirmation]
+    image: img_url
+  )
+
+  session[:user] = @user.id
+  redirect '/'
 end
 
 get '/detail/:id' do
