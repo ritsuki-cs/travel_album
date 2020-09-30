@@ -15,3 +15,19 @@ enable :sessions
 get '/' do
   erb :index
 end
+
+get '/signin' do
+  erb :signin
+end
+
+get '/signup' do
+  erb :signup
+end
+
+get '/detail/:id' do
+  erb :detail
+end
+
+get '/new' do
+  erb :new
+end

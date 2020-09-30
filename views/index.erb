@@ -1,28 +1,36 @@
-<nav>
-  <h1>Travel Album</h1>
-  <form action="/search" method="post">
-    <input type="text" placeholder="アカウント名、場所名">
-    <input type="submit" value="検索">
-  </form>
-  <img src="#" alt="アカウント画像">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/"><h1>Travel Album</h1></a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <img src="#" alt="アカウント画像">
+  </div>
 </nav>
 <main>
-  <form action="/scope" method="post">
-    <select name="" id="">
-      <option value="">選択肢1</option>
-      <option value="">選択肢2</option>
-      <option value="">選択肢3</option>
-      <option value="">選択肢4</option>
-    </select>
-    <select name="" id="">
-      <option value="">選択肢1</option>
-      <option value="">選択肢2</option>
-      <option value="">選択肢3</option>
-      <option value="">選択肢4</option>
-    </select>
-    <input type="submit" value="検索">
-  </form>
-
-  <button>追加</button>
-  <%#= eachを用いて投稿をループで表示する %>
+  <div class="container-fluid">
+    <div class="row">
+        <form action="/scope" method="post">
+          <select name="" id="">
+            <option value="">選択肢1</option>
+            <option value="">選択肢2</option>
+            <option value="">選択肢3</option>
+            <option value="">選択肢4</option>
+          </select>
+          <select name="" id="">
+            <option value="">選択肢1</option>
+            <option value="">選択肢2</option>
+            <option value="">選択肢3</option>
+            <option value="">選択肢4</option>
+          </select>
+          <input type="submit" value="検索">
+        </form>
+        <button>追加</button>
+    </div>
+    <%#= eachを用いて投稿をループで表示する %>
+  </div>
 </main>
