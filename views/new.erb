@@ -8,7 +8,18 @@
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    <img src="#" alt="アカウント画像">
+    <img src="<%= current_user.image %>" alt="アカウント画像" width="40" height="40">
   </div>
 </nav>
-<main></main>
+<main>
+  <form action="/new">
+    <select name="type" id="type">
+      <option value="">選択肢1</option>
+      <option value="">選択肢2</option>
+      <option value="">選択肢3</option>
+      <option value="">選択肢4</option>
+    </select><br>
+    <textarea name="comment" id="" cols="30" rows="10"></textarea>
+    <input type="submit" value="登録">
+  </form>
+</main>

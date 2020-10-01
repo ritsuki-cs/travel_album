@@ -8,7 +8,7 @@
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    <img src="#" alt="アカウント画像">
+    <img src="<%= current_user.image %>" alt="アカウント画像"  width="40" height="40">
   </div>
 </nav>
 <main>
@@ -29,7 +29,7 @@
           </select>
           <input type="submit" value="検索">
         </form>
-        <button>追加</button>
+        <button><a href="/new">追加</a></button>
     </div>
     <%#= eachを用いて投稿をループで表示する %>
   </div>

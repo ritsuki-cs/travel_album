@@ -18,6 +18,21 @@ helpers do
   end
 end
 
+before do
+  Dotenv.load
+  Cloudinary.config do |config|
+    config.cloud_name = ENV['CLOUD_NAME']
+    config.api_key = ENV['CLOUDINARY_API_KEY']
+    config.api_secret = ENV['CLOUDINARY_API_SECRET']
+  end
+end
+
+before '/' do
+  if session[:user].nil?
+    redirect '/signin'
+  end
+end
+
 get '/' do
   erb :index
 end
@@ -39,16 +54,16 @@ get '/signup' do
 end
 
 post '/signup' do
-if params[:image]
+  if params[:image]
     image = params[:image][:tempfile]
     upload = Cloudinary::Uploader.upload(image.path)
     img_url = upload['url']
   end
 
   @user = User.create(
-    name: params[:name]
-    password: params[:password]
-    password_confirmation: params[:password_confirmation]
+    name: params[:name],
+    password: params[:password],
+    password_confirmation: params[:password_confirmation],
     image: img_url
   )
 
