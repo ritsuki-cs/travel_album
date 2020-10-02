@@ -33,6 +33,18 @@ before '/' do
   end
 end
 
+before '/detail/:id' do
+  if session[:user].nil?
+    redirect '/signin'
+  end
+end
+
+before '/new' do
+  if session[:user].nil?
+    redirect '/signin'
+  end
+end
+
 get '/' do
   erb :index
 end
