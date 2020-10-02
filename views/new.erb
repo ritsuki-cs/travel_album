@@ -8,7 +8,7 @@
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    <a href="#"><img src="<%= current_user.image %>" alt="アカウント画像" width="40" height="40"></a>
+    <a href="/menu"><img src="<%= current_user.image %>" alt="アカウント画像" width="40" height="40"></a>
   </div>
 </nav>
 <main>
@@ -21,6 +21,40 @@
       <option value="">選択肢4</option>
     </select><br>
     <textarea name="comment" id="" cols="30" rows="10"></textarea>
+
+
+    <%# Google Mapを表示＆検索 %>
+    <h2>gmap</h2>
+
+    <input type="text" name="mapKey" placeholder="キーワード検索">
+    <div id='map'></div>
+
+    <style>
+    #map {
+      height: 300px;
+      width: 300px;
+    }
+    </style>
+
+    <script>
+    let map
+
+    function initMap(){
+      geocoder = new google.maps.Geocoder()
+
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 40.7828, lng:-73.9653},
+        zoom: 12,
+      });
+
+      marker = new google.maps.Marker({
+        position:  {lat: 40.7828, lng:-73.9653},
+        map: map
+      });
+    }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjQu4tJW4hYSUAHBEZMXkLe7lqV8QB76M&callback=initMap" async defer></script>
+
     <input type="submit" value="登録">
   </form>
 </main>

@@ -90,3 +90,7 @@ end
 get '/new' do
   erb :new
 end
+
+post '/search' do
+  key = params[:search]
+end
