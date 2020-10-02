@@ -21,40 +21,49 @@
       <option value="">選択肢4</option>
     </select><br>
     <textarea name="comment" id="" cols="30" rows="10"></textarea>
-
-
-    <%# Google Mapを表示＆検索 %>
-    <h2>gmap</h2>
-
-    <input type="text" name="mapKey" placeholder="キーワード検索">
-    <div id='map'></div>
-
-    <style>
-    #map {
-      height: 300px;
-      width: 300px;
-    }
-    </style>
-
-    <script>
-    let map
-
-    function initMap(){
-      geocoder = new google.maps.Geocoder()
-
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 40.7828, lng:-73.9653},
-        zoom: 12,
-      });
-
-      marker = new google.maps.Marker({
-        position:  {lat: 40.7828, lng:-73.9653},
-        map: map
-      });
-    }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjQu4tJW4hYSUAHBEZMXkLe7lqV8QB76M&callback=initMap" async defer></script>
-
     <input type="submit" value="登録">
   </form>
+
+  <%# Google Mapを表示＆検索 %>
+  <form action="/mapsearch" method="post">
+    <input type="text" name="map_key" placeholder="場所の検索">
+    <input type="submit" value="検索">
+  </form>
+
+  <div id='map'></div>
+
+  <style>
+  #map {
+    height: 300px;
+    width: 300px;
+  }
+  </style>
+
+  <script>
+  let map
+
+  function initMap(){
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      <% if session[:lat].nil? %>
+        center: {lat: 40.7828, lng:-73.9653},
+      <% else %>
+        center: {lat: <%= session[:lat] %>, lng: <%= session[:lng] %>},
+      <% end %>
+      zoom: 17
+    });
+
+    marker = new google.maps.Marker({
+      <% if session[:lat].nil? %>
+        position: {lat: 40.7828, lng:-73.9653},
+      <% else %>
+        position: {lat: <%= session[:lat] %>, lng: <%= session[:lng] %>},
+      <% end %>
+      map: map
+    });
+  }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjQu4tJW4hYSUAHBEZMXkLe7lqV8QB76M&callback=initMap" async defer></script>
+
+
 </main>

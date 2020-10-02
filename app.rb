@@ -43,6 +43,15 @@ before '/new' do
   if session[:user].nil?
     redirect '/signin'
   end
+  session[:lat] = nil
+  session[:lng] = nil
+  session[:name] = nil
+end
+
+before '/mapsearch' do
+  if session[:user].nil?
+    redirect '/signin'
+  end
 end
 
 get '/' do
@@ -93,4 +102,28 @@ end
 
 post '/search' do
   key = params[:search]
+end
+
+post '/mapsearch' do
+  p params[:map_key]
+  if params[:map_key] == ""
+    erb :new
+  else
+    searchPlace = params[:map_key]
+    uri = URI("https://maps.googleapis.com/maps/api/place/textsearch/json")
+    uri.query = URI.encode_www_form({
+      language: "ja",
+      query: searchPlace,
+      key: "AIzaSyAjQu4tJW4hYSUAHBEZMXkLe7lqV8QB76M"
+    })
+    res = Net::HTTP.get_response(uri)
+    json = JSON.parse(res.body)
+    lat = json["results"][0]["geometry"]["location"]["lat"]
+    lng = json["results"][0]["geometry"]["location"]["lng"]
+    name = json["results"][0]["name"]
+    session[:lat] = lat
+    session[:lng] = lng
+    session[:name] = name
+    erb :new
+  end
 end
