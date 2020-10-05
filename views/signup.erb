@@ -1,10 +1,12 @@
-<main>
-  <h1>Travle Album</h1>
-  <form action="/signup" method="post" enctype="multipart/form-data">
-    <input type="text" name="name" placeholder="ユーザー名"><br>
-    <input type="password" name="password" placeholder="パスワード"><br>
-    <input type="password" name="password_confirmation" placeholder="パスワードの確認"><br>
-    <input type="file" name="image"><br>
-    <input type="submit" value="新規登録">
-  </form>
+<main class="text-center">
+  <div class="height-center signup-husen">
+    <h1 class="h1 mb-3 font-weight-normal">Travle Album</h1>
+    <form action="/signup" method="post" enctype="multipart/form-data" class="form-signin">
+      <input type="text" name="name" placeholder="ユーザー名" class="form-control form-signup"><br>
+      <input type="password" name="password" placeholder="パスワード" class="form-control form-signup"><br>
+      <input type="password" name="password_confirmation" placeholder="パスワードの確認" class="form-control form-signup"><br>
+      <input type="file" name="image" class=""><br>
+      <input type="submit" value="新規登録" class="btn btn-lg btn-primary btn-block">
+    </form>
+  </div>
 </main>

@@ -1,5 +1,5 @@
 body {
-  background-image: url('../img/corkboard.jpg');
+  background-image: url('../img/corkboard.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -7,4 +7,34 @@ body {
 nav img {
   border-radius: 50%;
   background-color: aliceblue;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.signup-husen {
+  padding: 220px;
+  background-image: url('../img/husen2.png');
+  background-size: 33%;
+  background-repeat: no-repeat;
+  background-position-y: 46%;
+  background-position-x: 51%;
+}
+
+.husen {
+  padding: 220px;
+  background-image: url('../img/husen2.png');
+  background-size: 30%;
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: 51%;
+}
+
+.contribute {
+  margin-left: 10%;
+  margin-right: 10%;
 }

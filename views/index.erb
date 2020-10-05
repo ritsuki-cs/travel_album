@@ -32,8 +32,10 @@
         <button><a href="/new">追加</a></button>
     </div>
     <%#= eachを用いて投稿をループで表示する %>
-    <% Contribute.all.each do |contribute| %>
-      <a href="/detail/<%= contribute.id %>"><img src="<%= Image.find_by(contribute_id: contribute.id).image %>" alt="投稿の画像" width="300" height="250"></a>
-    <% end %>
+    <div class="row contribute">
+      <% Contribute.all.each do |contribute| %>
+        <a href="/detail/<%= contribute.id %>"><img src="<%= Image.find_by(contribute_id: contribute.id).image %>" alt="投稿の画像" width="300" height="250"></a>
+      <% end %>
+    </div>
   </div>
 </main>
