@@ -12,16 +12,16 @@
   </div>
 </nav>
 <main>
-  <form action="/new">
-    <input type="file" name="images"><br>
+  <form action="/new" method="post" enctype="multipart/form-data">
+    <input type="file" name="image"><br>
     <select name="prefecture">
-      <option value="default">都道府県を選択してください</option>
+      <option value="">都道府県を選択してください</option>
       <% @prefectures.each do |prefecture| %>
-        <option value="<%= prefecture.id %>"><%= prefecture.prefecture %></option>
+        <option value="<%= prefecture.id %>" <% if  false %> selected <% end %>><%= prefecture.prefecture %></option>
       <% end %>
     </select><br>
-    <select name="type" id="type">
-      <option value="default">ジャンルを選択してください</option>
+    <select name="type">
+      <option value="">ジャンルを選択してください</option>
       <% @types.each do |type| %>
         <option value="<%= type.id %>"><%= type.name %></option>
       <% end %>

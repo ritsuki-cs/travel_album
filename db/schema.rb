@@ -10,11 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_05_025238) do
+ActiveRecord::Schema.define(version: 2020_10_05_055929) do
+
+  create_table "contributes", force: :cascade do |t|
+    t.integer "prefecture_id"
+    t.integer "type_id"
+    t.string "comment"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "follows", force: :cascade do |t|
     t.integer "following_id"
     t.integer "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "image"
+    t.integer "contribute_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.float "lat"
+    t.float "lng"
+    t.string "name"
+    t.integer "contribute_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

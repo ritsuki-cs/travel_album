@@ -35,3 +35,7 @@ end
 class Image < ActiveRecord::Base
   belongs_to :contribute
 end
+
+class Place < ActiveRecord::Base
+  belongs_to :contribute
+end

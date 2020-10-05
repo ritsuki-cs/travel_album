@@ -11,4 +11,46 @@
     <a href="/menu"><img src="<%= current_user.image %>" alt="アカウント画像" width="40" height="40"></a>
   </div>
 </nav>
-<main></main>
+<main>
+  <img src="<%= Image.find_by(contribute_id: params[:id]).image %>" alt="投稿の画像" width="600" height="500">
+
+  <div id='map'></div>
+
+  <table>
+    <tr>
+      <td>場所</td>
+      <td><%= Place.find_by(contribute_id: params[:id]).name %></td>
+    </tr>
+    <tr>
+      <td>内容</td>
+      <td><%= @contribute.comment %></td>
+    </tr>
+  </table>
+
+  <a href="/">戻る</a>
+
+  <style>
+  #map {
+    height: 350px;
+    width: 350px;
+  }
+  </style>
+
+  <script>
+  let map
+
+  function initMap(){
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: <%= Place.find_by(contribute_id: params[:id]).lat %>, lng: <%= Place.find_by(contribute_id: params[:id]).lng %>},
+      zoom: 17
+    });
+
+    marker = new google.maps.Marker({
+      position: {lat: <%= Place.find_by(contribute_id: params[:id]).lat %>, lng: <%= Place.find_by(contribute_id: params[:id]).lng %>},
+      map: map
+    });
+  }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjQu4tJW4hYSUAHBEZMXkLe7lqV8QB76M&callback=initMap" async defer></script>
+</main>

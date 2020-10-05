@@ -43,9 +43,6 @@ before '/new' do
   if session[:user].nil?
     redirect '/signin'
   end
-  session[:lat] = nil
-  session[:lng] = nil
-  session[:name] = nil
 end
 
 before '/mapsearch' do
@@ -93,14 +90,13 @@ post '/signup' do
 end
 
 get '/detail/:id' do
+  @contribute = Contribute.find_by(id: params[:id])
   erb :detail
 end
 
 get '/new' do
   @types = Type.all
   @prefectures = Prefecture.all
-  p "##############"
-  p session[:lat]
   if session[:lat].nil?
     @lat = nil
     @lng = nil
@@ -113,6 +109,36 @@ get '/new' do
   erb :new
 end
 
+post '/new' do
+  if params[:image]
+    image = params[:image][:tempfile]
+    upload = Cloudinary::Uploader.upload(image.path)
+    img_url = upload['url']
+  end
+
+  Contribute.create!(
+    prefecture_id: params[:prefecture],
+    type_id: params[:type],
+    comment: params[:comment],
+    user_id: current_user.id
+  )
+  Image.create!(
+    image: img_url,
+    contribute_id: Contribute.last.id
+  )
+  Place.create!(
+    lat: session[:lat],
+    lng: session[:lng],
+    name: session[:name],
+    contribute_id: Contribute.last.id
+  )
+  session[:lat] = nil
+  session[:lng] = nil
+  session[:name] = nil
+  session[:place_id] = nil
+  redirect '/'
+end
+
 post '/search' do
   key = params[:search]
 end
@@ -120,7 +146,6 @@ end
 post '/mapsearch' do
   @types = Type.all
   @prefectures = Prefecture.all
-  p params[:map_key]
   if params[:map_key] == ""
     redirect '/new'
   else
@@ -136,11 +161,11 @@ post '/mapsearch' do
     lat = json["results"][0]["geometry"]["location"]["lat"]
     lng = json["results"][0]["geometry"]["location"]["lng"]
     name = json["results"][0]["name"]
+    place_id = json["results"][0]["place_id"]
     session[:lat] = lat
     session[:lng] = lng
     session[:name] = name
-    p "リダイレクト前"
-    p session[:lat]
+    session[:place_id] = place_id
     redirect '/new'
   end
 end
