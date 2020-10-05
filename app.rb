@@ -97,6 +97,19 @@ get '/detail/:id' do
 end
 
 get '/new' do
+  @types = Type.all
+  @prefectures = Prefecture.all
+  p "##############"
+  p session[:lat]
+  if session[:lat].nil?
+    @lat = nil
+    @lng = nil
+    @name = nil
+  else
+    @lat = session[:lat]
+    @lng = session[:lng]
+    @name = session[:name]
+  end
   erb :new
 end
 
@@ -105,9 +118,11 @@ post '/search' do
 end
 
 post '/mapsearch' do
+  @types = Type.all
+  @prefectures = Prefecture.all
   p params[:map_key]
   if params[:map_key] == ""
-    erb :new
+    redirect '/new'
   else
     searchPlace = params[:map_key]
     uri = URI("https://maps.googleapis.com/maps/api/place/textsearch/json")
@@ -124,6 +139,8 @@ post '/mapsearch' do
     session[:lat] = lat
     session[:lng] = lng
     session[:name] = name
-    erb :new
+    p "リダイレクト前"
+    p session[:lat]
+    redirect '/new'
   end
 end
