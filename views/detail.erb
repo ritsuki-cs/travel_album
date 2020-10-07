@@ -12,27 +12,23 @@
   </div>
 </nav>
 <main>
-  <img src="<%= Image.find_by(contribute_id: params[:id]).image %>" alt="投稿の画像" width="600" height="500">
-
+  <div class="image-detail">
+    <img src="<%= Image.find_by(contribute_id: params[:id]).image %>" alt="投稿の画像" width="600" height="500">
+  </div>
+  <div class="blank"></div>
   <div id='map'></div>
 
-  <table>
-    <tr>
-      <td>場所</td>
-      <td><%= Place.find_by(contribute_id: params[:id]).name %></td>
-    </tr>
-    <tr>
-      <td>内容</td>
-      <td><%= @contribute.comment %></td>
-    </tr>
-  </table>
-
-  <a href="/">戻る</a>
+  <div class="comment">
+    <p>場所：<%= Place.find_by(contribute_id: params[:id]).name %></p>
+    <p>都道府県</p>
+    <p>ジャンル</p>
+    <p>内容：<%= @contribute.comment %></p>
+  </div>
 
   <style>
   #map {
-    height: 350px;
-    width: 350px;
+    height: 300px;
+    width: 300px;
   }
   </style>
 

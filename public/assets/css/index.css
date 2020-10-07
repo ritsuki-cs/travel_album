@@ -37,4 +37,31 @@ nav img {
 .contribute {
   margin-left: 10%;
   margin-right: 10%;
+  margin-top: 50px;
+}
+
+.contribute-element {
+  text-align: center;
+}
+
+.image-detail {
+  margin-top: 5px;
+  margin-left: 10%;
+  margin-right: 10%;
+  float: left;
+}
+
+.blank {
+  margin: 5% 0;
+}
+
+.comment {
+  width: 500px;
+  height: 400px;
+  margin-top: 40px;
+  margin-left: 55%;
+  padding: 100px 130px;
+  background-image: url('../img/husen3.png');
+  background-size: contain;
+  background-repeat: no-repeat;
 }
