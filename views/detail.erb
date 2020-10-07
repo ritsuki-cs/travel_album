@@ -1,14 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/"><h1>Travel Album</h1></a>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+<nav>
+  <a href="/"><h1>Travel Album</h1></a>
+  <ul>
+  </ul>
+  <form class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+  <ul>
+  </ul>
+  <div class="menu-block">
+    <ul class="menu">
+      <li>
+      <a href=""><img src="<%= current_user.image %>" alt="アカウント画像" width="40" height="40"></a>
+        <ul>
+          <li><a href="">ログアウト</a></li>
+          <li><a href="">フォロー</a></li>
+          <li><a href="">フォロワー</a></li>
+        </ul>
+      </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    <a href="/menu"><img src="<%= current_user.image %>" alt="アカウント画像" width="40" height="40"></a>
   </div>
 </nav>
 <main>
@@ -49,4 +59,19 @@
   }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjQu4tJW4hYSUAHBEZMXkLe7lqV8QB76M&callback=initMap" async defer></script>
+
+  <%# アコーディオンメニュー %>
+  <script>
+  {
+  const parentMenu = document.querySelectorAll('.menu > li > a');
+  for(let i = 0;i < parentMenu.length;i++) {
+    parentMenu[i].addEventListener('click',function(e){
+// 今起こっているイベント要素をthis
+      e.preventDefault();
+      this.nextElementSibling.classList.toggle('active');
+    });
+  }
+
+}
+  </script>
 </main>

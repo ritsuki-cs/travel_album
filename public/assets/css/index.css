@@ -2,9 +2,30 @@ body {
   background-image: url('../img/corkboard.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
+  background-position-y: 0;
+}
+
+button.btn-outline-success {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+nav h1 {
+  float: left;
+  margin-right: 50%;
+  margin-left: 30px;
+}
+
+nav form {
+  /* margin-left: 50%; */
+}
+
+nav a {
+  color: white;
 }
 
 nav img {
+  margin-left: 100px;
   border-radius: 50%;
   background-color: aliceblue;
 }
@@ -64,4 +85,53 @@ nav img {
   background-image: url('../img/husen3.png');
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+/* アコーディオンメニュー */
+.menu {
+  max-width: 160px;
+
+  list-style: none;
+  padding: 0 0 5px 0;
+  margin: 0;
+}
+
+.menu ul {
+  display: none;
+  /* list-style: none; */
+}
+.menu ul.active {
+  background-color: white;
+  display: block;
+  width: 120px;
+  transform: translateX(20px);
+  transition: 0.4s;
+  padding: 5px 5px 5px 30px;
+}
+
+.menu > li > a {
+  display: block;
+  /* border-bottom: 1px solid black; */
+}
+.menu > li > a::before {
+  content: '';
+  width: 4px;
+  height: 3px;
+  border: 0;
+  /* border-right: 2px solid black; */
+  /* border-bottom: 2px solid black; */
+  transform: rotate(45deg);
+  position: absolute;
+  margin-top: 7px;
+}
+.menu > li > ul a {
+  display: block;
+  color: #000000;
+  border-bottom: 1px solid black;
+  margin-bottom: 2px;
+}
+
+.menu-block {
+  width: 300px;
+  margin: 0;
 }
