@@ -2,20 +2,19 @@
   <a href="/"><h1>Travel Album</h1></a>
   <ul>
   </ul>
-  <form class="form-inline my-2 my-lg-0">
+  <form name="search" action="/search" method="post" class="form-inline my-2 my-lg-0">
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form>
-  <ul>
-  </ul>
   <div class="menu-block">
     <ul class="menu">
       <li>
       <a href=""><img src="<%= current_user.image %>" alt="アカウント画像" width="40" height="40"></a>
         <ul>
-          <li><a href="">ログアウト</a></li>
+          <li><a href="/home/<%= current_user.id %>">ホーム</a></li>
           <li><a href="">フォロー</a></li>
           <li><a href="">フォロワー</a></li>
+          <li><a href="/logout">ログアウト</a></li>
         </ul>
       </li>
     </ul>

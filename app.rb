@@ -140,7 +140,9 @@ post '/new' do
 end
 
 post '/search' do
-  key = params[:search]
+  name = params[:search]
+  id = User.find_by(name: name).id
+  redirect "/home/#{id}"
 end
 
 post '/mapsearch' do
@@ -168,4 +170,13 @@ post '/mapsearch' do
     session[:place_id] = place_id
     redirect '/new'
   end
+end
+
+get '/logout' do
+  session[:user] = nil
+  redirect '/signin'
+end
+
+get '/home/:id' do
+  erb :home
 end

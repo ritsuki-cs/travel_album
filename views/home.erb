@@ -22,32 +22,17 @@
 </nav>
 <main>
   <div class="container-fluid">
-    <%# <div class="row">
-        <form action="/scope" method="post">
-          <select name="" id="">
-            <option value="">選択肢1</option>
-            <option value="">選択肢2</option>
-            <option value="">選択肢3</option>
-            <option value="">選択肢4</option>
-          </select>
-          <select name="" id="">
-            <option value="">選択肢1</option>
-            <option value="">選択肢2</option>
-            <option value="">選択肢3</option>
-            <option value="">選択肢4</option>
-          </select>
-          <input type="submit" value="検索">
-        </form>
-    </div> %>
     <div class="page-title">
-      <h2>最近の投稿</h2>
-      <button class="add"><a href="/new">追加</a></button>
+      <h2><%= User.find_by(id: params[:id]).name %>のホーム</h2>
+      <% if current_user.id == params[:id].to_i %>
+        <button class="add"><a href="/new">追加</a></button>
+      <% end %>
       <br>
       <p>　</p>
     </div>
     <%#= eachを用いて投稿をループで表示する %>
     <div class="row contribute">
-      <% Contribute.all.each do |contribute| %>
+      <% Contribute.where(user_id: params[:id]).each do |contribute| %>
         <div class="col-lg-4 contribute-element">
           <a href="/detail/<%= contribute.id %>"><img src="<%= Image.find_by(contribute_id: contribute.id).image %>" alt="投稿の画像" width="300" height="250"></a>
         </div>

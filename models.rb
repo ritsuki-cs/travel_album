@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   has_many :contributes
   has_many :following, through: :follows
   has_many :followed, through: :follows
+  validates :name, presence: true
+  validates :password, presence: true
+  validates :image, presence: true
 end
 
 class Follow < ActiveRecord::Base
@@ -22,6 +25,7 @@ class Contribute < ActiveRecord::Base
   belongs_to :prefecture
   belongs_to :type
   has_many :images
+  validates :comment, presence: true
 end
 
 class Prefecture < ActiveRecord::Base
@@ -34,6 +38,7 @@ end
 
 class Image < ActiveRecord::Base
   belongs_to :contribute
+  validates :image, presence: true
 end
 
 class Place < ActiveRecord::Base
