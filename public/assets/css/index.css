@@ -8,16 +8,17 @@ body {
 /* nav */
 nav h1 {
   float: left;
-  margin-right: 45%;
-  margin-left: 30px;
+  margin-right: 43%;
+  margin-left: 70px;
+  color: white;
 }
 
-nav a:link,
+/* nav a:link,
 a:visited,
 a:hover,
 a:active {
   color: white;
-}
+} */
 
 nav form {
   /* margin-left: 50%; */
@@ -143,7 +144,7 @@ nav img {
 }
 
 .menu-block {
-  width: 300px;
+  /* width: 300px; */
   margin: 0;
   position: absolute;
   left: 83%;
@@ -204,16 +205,17 @@ footer {
 }
 
 .page-title {
-  position: relative;
-  left: 40%;
-  top: 50px;
-  max-width: 600px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
   margin-bottom: 20px;
   padding: 20px;
 }
 
 .page-title h2 {
-  float: left;
+  display: inline-block;
+  text-align: left;
   position: relative;
   background: #dfefff;
   box-shadow: 0px 0px 0px 5px #dfefff;
@@ -231,4 +233,12 @@ footer {
   border-style: solid;
   border-color: #fff #fff #a8d4ff;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+footer {
+  max-width: 100%;
+}
+
+.btn-follow {
+  margin: 10px;
 }

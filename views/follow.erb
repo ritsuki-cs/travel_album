@@ -23,27 +23,8 @@
 <main>
   <div class="container-fluid">
     <div class="page-title">
-      <h2><%= User.find_by(id: params[:id]).name %>のホーム</h2>
-      <% if current_user.id == params[:id].to_i %>
-        <button class="add"><a href="/new">追加</a></button>
-      <% else %>
-        <% if Follow.find_by(following_id: current_user.id, followed_id: params[:id]).nil? %>
-          <button class="btn btn-light btn-follow"><a href="/follow/add/<%= params[:id] %>">フォローする</a></button>
-        <% else %>
-          <button class="btn btn-light btn-follow"><a href="/follow/delete/<%= params[:id] %>">フォロー解除</a></button>
-        <% end %>
+      <h2><%= User.find_by(id: params[:id]).name %>のフォロー一覧</h2>
 
-      <% end %>
-      <br>
-      <p>　</p>
-    </div>
-    <%#= eachを用いて投稿をループで表示する %>
-    <div class="row contribute">
-      <% Contribute.where(user_id: params[:id]).each do |contribute| %>
-        <div class="col-lg-4 contribute-element">
-          <a href="/detail/<%= contribute.id %>"><img src="<%= Image.find_by(contribute_id: contribute.id).image %>" alt="投稿の画像" width="300" height="250"></a>
-        </div>
-      <% end %>
     </div>
   </div>
 </main>

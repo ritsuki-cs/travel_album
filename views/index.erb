@@ -12,8 +12,8 @@
       <a href=""><img src="<%= current_user.image %>" alt="アカウント画像" width="40" height="40"></a>
         <ul>
           <li><a href="/home/<%= current_user.id %>">ホーム</a></li>
-          <li><a href="">フォロー</a></li>
-          <li><a href="">フォロワー</a></li>
+          <li><a href="/follow/<%= current_user.id %>">フォロー</a></li>
+          <li><a href="/follower/<%= current_user.id %>">フォロワー</a></li>
           <li><a href="/logout">ログアウト</a></li>
         </ul>
       </li>

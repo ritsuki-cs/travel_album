@@ -141,8 +141,13 @@ end
 
 post '/search' do
   name = params[:search]
-  id = User.find_by(name: name).id
-  redirect "/home/#{id}"
+  user = User.find_by(name: name)
+  if user.nil?
+    redirect '/'
+  else
+    id = user.id
+    redirect "/home/#{id}"
+  end
 end
 
 post '/mapsearch' do
@@ -179,4 +184,26 @@ end
 
 get '/home/:id' do
   erb :home
+end
+
+get '/follow/:id' do
+  erb :follow
+end
+
+get '/follower/:id' do
+  erb :follower
+end
+
+get '/follow/add/:id' do
+  Follow.create(
+    following_id: current_user.id,
+    followed_id: params[:id]
+  )
+
+  redirect '/'
+end
+
+get '/follow/delete/:id' do
+  Follow.find_by(following_id: current_user.id, followed_id: params[:id]).delete
+  redirect '/'
 end
