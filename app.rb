@@ -187,10 +187,12 @@ get '/home/:id' do
 end
 
 get '/follow/:id' do
+  @following_users = Follow.where(following_id: current_user.id)
   erb :follow
 end
 
 get '/follower/:id' do
+  @followed_users = Follow.where(followed_id: current_user.id)
   erb :follower
 end
 

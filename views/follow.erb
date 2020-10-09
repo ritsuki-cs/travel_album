@@ -24,7 +24,13 @@
   <div class="container-fluid">
     <div class="page-title">
       <h2><%= User.find_by(id: params[:id]).name %>のフォロー一覧</h2>
-
+    </div>
+    <div>
+      <% if !@following_users.nil? %>
+        <% @following_users.each do |following_user| %>
+          <p><%= User.find_by(id: following_user.followed_id).name %></p>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </main>

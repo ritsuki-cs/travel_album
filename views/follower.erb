@@ -25,6 +25,13 @@
     <div class="page-title">
       <h2><%= User.find_by(id: params[:id]).name %>のフォロワー一覧</h2>
     </div>
+    <div>
+      <% if !@followed_users.nil? %>
+        <% @followed_users.each do |followed_user| %>
+          <p><%= User.find_by(id: followed_user.following_id).name %></p>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 </main>
 

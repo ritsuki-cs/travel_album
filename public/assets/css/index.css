@@ -70,11 +70,12 @@ nav img {
 .contribute {
   margin-left: 10%;
   margin-right: 10%;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .contribute-element {
   text-align: center;
+  margin-bottom: 70px;
 }
 
 .image-detail {
