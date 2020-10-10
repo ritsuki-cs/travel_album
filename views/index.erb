@@ -49,6 +49,7 @@
       <% Contribute.all.each do |contribute| %>
         <div class="col-lg-4 contribute-element">
           <a href="/detail/<%= contribute.id %>"><img src="<%= Image.find_by(contribute_id: contribute.id).image %>" alt="投稿の画像" width="320" height="250"></a>
+          <div class="pin">　</div>
         </div>
       <% end %>
     </div>

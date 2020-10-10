@@ -92,10 +92,19 @@ nav img {
   margin-bottom: 70px;
 }
 
+.pin {
+  background-image: url('../img/pin.png');
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 10px;
+  left: 49%;
+}
+
 .contribute-element img {
   padding: 5px 10px;
   background-clip: padding-box;
   background-color: #ffffff;
+  position: relative;
 }
 
 .image-detail {
@@ -106,6 +115,20 @@ nav img {
   padding: 5px 10px;
   background-clip: padding-box;
   background-color: #ffffff;
+}
+
+.image-detail img {
+  position: relative;
+}
+
+.pin-big {
+  background-image: url('../img/pin_big.png');
+  background-repeat: no-repeat;
+  position: absolute;
+  background-size: contain;
+  font-size: 50px;
+  top: 170px;
+  left: 30%;
 }
 
 .blank {
