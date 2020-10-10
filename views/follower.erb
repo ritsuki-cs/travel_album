@@ -1,8 +1,7 @@
 <nav>
   <a href="/"><h1>Travel Album</h1></a>
-  <ul>
-  </ul>
-  <form action="/search" method="post" class="form-inline my-2 my-lg-0">
+  <p></p>
+  <form action="/search" method="post" class="form-inline my-2 my-lg-0 search">
     <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form>
@@ -26,11 +25,15 @@
       <h2><%= User.find_by(id: params[:id]).name %>のフォロワー一覧</h2>
     </div>
     <div>
-      <% if !@followed_users.nil? %>
-        <% @followed_users.each do |followed_user| %>
-          <p><%= User.find_by(id: followed_user.following_id).name %></p>
+      <ul>
+        <% if @followed_users != [] && !@followed_users.nil? %>
+          <% @followed_users.each do |followed_user| %>
+            <li><a href="/home/<%= User.find_by(id: followed_user.following_id).id %>"><img class="acount-image" src="<%= User.find_by(id: followed_user.following_id).image %>" width="40" height="40"></a>　<%= User.find_by(id: followed_user.following_id).name %></li>
+          <% end %>
+        <% else %>
+          <li style="list-style: none; text-align: center;">フォロワーはいません</li>
         <% end %>
-      <% end %>
+      </ul>
     </div>
   </div>
 </main>

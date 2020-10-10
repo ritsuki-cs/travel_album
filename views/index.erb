@@ -1,8 +1,7 @@
 <nav>
+  <p></p>
   <a href="/"><h1>Travel Album</h1></a>
-  <ul>
-  </ul>
-  <form action="/search" method="post" class="form-inline my-2 my-lg-0">
+  <form action="/search" method="post" class="form-inline my-2 my-lg-0 search">
     <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form>
@@ -49,7 +48,7 @@
     <div class="row contribute">
       <% Contribute.all.each do |contribute| %>
         <div class="col-lg-4 contribute-element">
-          <a href="/detail/<%= contribute.id %>"><img src="<%= Image.find_by(contribute_id: contribute.id).image %>" alt="投稿の画像" width="300" height="250"></a>
+          <a href="/detail/<%= contribute.id %>"><img src="<%= Image.find_by(contribute_id: contribute.id).image %>" alt="投稿の画像" width="320" height="250"></a>
         </div>
       <% end %>
     </div>
