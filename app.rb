@@ -9,6 +9,7 @@ require 'dotenv/load'
 require 'open-uri'
 require 'net/http'
 require 'json'
+require 'sinatra/json'
 
 enable :sessions
 
@@ -127,15 +128,11 @@ post '/new' do
     contribute_id: Contribute.last.id
   )
   Place.create!(
-    lat: session[:lat],
-    lng: session[:lng],
-    name: session[:name],
+    lat: params[:lat],
+    lng: params[:lng],
+    name: params[:name],
     contribute_id: Contribute.last.id
   )
-  session[:lat] = nil
-  session[:lng] = nil
-  session[:name] = nil
-  session[:place_id] = nil
   redirect '/'
 end
 
@@ -150,31 +147,32 @@ post '/search' do
   end
 end
 
+# 検索結果を出力するAPI
 post '/mapsearch' do
-  @types = Type.all
-  @prefectures = Prefecture.all
-  if params[:map_key] == ""
-    redirect '/new'
-  else
-    searchPlace = params[:map_key]
-    uri = URI("https://maps.googleapis.com/maps/api/place/textsearch/json")
-    uri.query = URI.encode_www_form({
-      language: "ja",
-      query: searchPlace,
-      key: "AIzaSyAjQu4tJW4hYSUAHBEZMXkLe7lqV8QB76M"
-    })
-    res = Net::HTTP.get_response(uri)
-    json = JSON.parse(res.body)
-    lat = json["results"][0]["geometry"]["location"]["lat"]
-    lng = json["results"][0]["geometry"]["location"]["lng"]
-    name = json["results"][0]["name"]
-    place_id = json["results"][0]["place_id"]
-    session[:lat] = lat
-    session[:lng] = lng
-    session[:name] = name
-    session[:place_id] = place_id
-    redirect '/new'
-  end
+  place = params[:place]
+  p place
+
+  uri = URI("https://maps.googleapis.com/maps/api/place/textsearch/json")
+  uri.query = URI.encode_www_form({
+    language: "ja",
+    query: place,
+    key: "AIzaSyAjQu4tJW4hYSUAHBEZMXkLe7lqV8QB76M"
+  })
+  res = Net::HTTP.get_response(uri)
+  json = JSON.parse(res.body)
+  lat = json["results"][0]["geometry"]["location"]["lat"]
+  lng = json["results"][0]["geometry"]["location"]["lng"]
+  name = json["results"][0]["name"]
+  place_id = json["results"][0]["place_id"]
+
+  data = {
+    lat: lat,
+    lng: lng,
+    name: name,
+    place_id: place_id
+  }
+  p data
+  json data
 end
 
 get '/logout' do

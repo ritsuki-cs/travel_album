@@ -35,16 +35,17 @@
       <% end %>
     </select><br>
     <textarea name="comment" id="" cols="35" rows="10"></textarea>
+    <input type="hidden" value="" id="lat" name="lat">
+    <input type="hidden" value="" id="lng" name="lng">
+    <input type="hidden" value="" id="name" name="name">
     <input type="submit" value="登録">
   </form>
 
   <%# Google Mapを表示＆検索 %>
   <div class="map">
-  <div id='map'></div>
-    <form action="/mapsearch" method="post" form-inline my-2 my-lg-0>
-      <input type="text" name="map_key" placeholder="場所の検索" class="form-control mr-sm-2">
-      <input type="submit" value="検索" class="btn btn-light my-2 my-sm-0">
-    </form>
+    <div id='map'></div>
+    <input type="text" name="place" id="place" placeholder="場所の検索" class="form-control mr-sm-2">
+    <input type="submit" id="submit" value="検索" class="btn btn-light my-2 my-sm-0">
   </div>
 
   <style>
@@ -54,37 +55,75 @@
   }
   </style>
 
-  <script>
+  <script type="text/javascript">
   let map
 
-  function initMap(){
+  $(function(){
 
+    $("#submit").click(function(){
+      var place = $("#place").val();
+      console.log("押されたよ");
+      console.log(place);
+      $.ajax({
+        type: "POST",
+        url: "/mapsearch",
+        dataType: "json",
+        data: {
+          place: place
+        },
+        success: function(json) {
+          console.log("success");
+          search(json);
+        },
+        error: function() {
+          console.log("error");
+          initMap();
+        }
+      });
+    });
+  });
+
+  function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-      <% if @lat == nil %>
-        center: {lat: 40.7828, lng:-73.9653},
-      <% else %>
-        center: {lat: <%= session[:lat] %>, lng: <%= session[:lng] %>},
-      <% end %>
+      center: {lat: 40.7828, lng:-73.9653},
       zoom: 17
     });
 
     marker = new google.maps.Marker({
-      <% if @lat == nil %>
-        position: {lat: 40.7828, lng:-73.9653},
-      <% else %>
-        position: {lat: <%= session[:lat] %>, lng: <%= session[:lng] %>},
-      <% end %>
+      position: {lat: 40.7828, lng:-73.9653},
       map: map
     });
+  }
+
+
+  function search(json){
+    console.log("jsonの中身↓")
+    console.log(json)
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: json["lat"], lng: json["lng"]},
+      zoom: 17
+    });
+
+    marker = new google.maps.Marker({
+      position: {lat: json["lat"], lng: json["lng"]},
+      map: map
+    });
+
+    document.getElementById("lat").value = json["lat"];
+    document.getElementById("lng").value = json["lng"];
+    document.getElementById("name").value = json["name"];
   }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjQu4tJW4hYSUAHBEZMXkLe7lqV8QB76M&callback=initMap" async defer></script>
 
+  <script>
+
+  </script>
 
 </main>
 
 <script>
-  {
+{
   const parentMenu = document.querySelectorAll('.menu > li > a');
   for(let i = 0;i < parentMenu.length;i++) {
     parentMenu[i].addEventListener('click',function(e){
@@ -93,6 +132,5 @@
       this.nextElementSibling.classList.toggle('active');
     });
   }
-
 }
-  </script>
+</script>
