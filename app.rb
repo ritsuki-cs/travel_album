@@ -212,3 +212,30 @@ get '/follow/delete/:id' do
   Follow.find_by(following_id: current_user.id, followed_id: params[:id]).delete
   redirect '/'
 end
+
+get '/edit/:id' do
+  @types = Type.all
+  @prefectures = Prefecture.all
+  erb :edit
+end
+
+post '/update/:id' do
+  contribute = Contribute.find_by(id: params[:id])
+  contribute.comment = params[:comment]
+  contribute.prefecture_id = params[:prefecture]
+  contribute.type_id = params[:type]
+  contribute.save
+
+  place = Place.find_by(contribute_id: params[:id])
+  place.lat = params[:lat]
+  place.lng = params[:lng]
+  place.name = params[:name]
+  place.save
+  redirect "/detail/#{params[:id]}"
+end
+
+get '/delete/:id' do
+  Contribute.find_by(id: params[:id]).destroy
+  Place.find_by(contribute_id: params[:id]).destroy
+  redirect "/home/#{current_user.id}"
+end

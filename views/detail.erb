@@ -39,11 +39,12 @@
     <p>都道府県：<%= Prefecture.find_by(id: @contribute.prefecture_id).prefecture %></p>
     <p>ジャンル：<%= Type.find_by(id: @contribute.type_id).name %></p>
     <p>内容：<%= @contribute.comment %></p>
+    <% if current_user.id == @contribute.user_id %>
+      <button class="edit btn btn-primary"><a href="/edit/<%= params[:id] %>">編集</a></button>
+      <button class="delete btn btn-primary"><a href="/delete/<%= params[:id] %>">削除</a></button>
+    <% end %>
   </div>
 
-
-  <button class="edit"><a href="/edit/<%= params[:id] %>">編集</a></button>
-  <button class="delete"><a href="/delete/<%= params[:id] %>">削除</a></button>
 
   <style>
   #map {

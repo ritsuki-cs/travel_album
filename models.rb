@@ -24,7 +24,7 @@ class Contribute < ActiveRecord::Base
   belongs_to :user
   belongs_to :prefecture
   belongs_to :type
-  has_many :images
+  has_many :images, dependent: :destroy
   validates :comment, presence: true
 end
 

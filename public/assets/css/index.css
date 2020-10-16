@@ -376,3 +376,8 @@ ul li {
   bottom: auto;
   box-shadow: none;
 }
+
+.edit a,
+.delete a {
+  color: white;
+}
