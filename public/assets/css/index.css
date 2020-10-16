@@ -107,28 +107,24 @@ nav img {
   position: relative;
 }
 
-.image-detail {
-  margin-top: 30px;
-  margin-left: 10%;
-  margin-right: 10%;
-  float: left;
-  padding: 5px 10px;
-  background-clip: padding-box;
-  background-color: #ffffff;
-}
-
-.image-detail img {
-  position: relative;
-}
-
 .pin-big {
   background-image: url('../img/pin_big.png');
   background-repeat: no-repeat;
   position: absolute;
   background-size: contain;
-  font-size: 50px;
-  top: 170px;
-  left: 30%;
+  font-size: 40px;
+  top: 14vw;
+  left: 10.5vw;
+}
+
+.pin-big2 {
+  background-image: url('../img/pin_big.png');
+  background-repeat: no-repeat;
+  position: absolute;
+  background-size: contain;
+  font-size: 40px;
+  top: 14vw;
+  left: 54vw;
 }
 
 .blank {
@@ -138,7 +134,7 @@ nav img {
 .comment {
   border-radius: 8px;
   width: 400px;
-  margin-top: 40px;
+  margin-top: 30%;
   margin-left: 60%;
   padding: 10px 40px;
   /* background-image: url('../img/husen3.png');
@@ -204,7 +200,7 @@ nav img {
   clear: both;
 }
 
-.form-new {
+/* .form-new {
   clear: both;
   position: absolute;
   left: 13%;
@@ -213,12 +209,40 @@ nav img {
   background-image: url('../img/husen2.png');
   background-size: 120%;
   background-repeat: no-repeat;
+} */
+
+.husen-form {
+  width: 500px;
+  margin-top: 10vh;
+  margin-left: 15vw;
+}
+
+.husen-form-top {
+  background-image: url('../img/husen4-top.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 110px;
+  width: 505px;
+}
+
+.husen-form-middle {
+  background-image: url('../img/husen4-middle.png');
+  background-size: cover;
+  padding: 0 45px;
+}
+
+.husen-form-bottom {
+  background-image: url('../img/husen4-bottom.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50px;
+  width: 539px;
 }
 
 .map {
   position: absolute;
-  left: 60%;
-  top: 20%;
+  left: 64%;
+  top: 15%;
 }
 
 .add {
@@ -299,4 +323,56 @@ ul li {
 .acount-image {
   border-radius: 50%;
   background-color: aliceblue;
+}
+
+/* 画像複数選択 */
+.input_plural {
+  padding-bottom: 10px;
+}
+
+.input_plural input.form-control {
+  display: inline-block;
+  width: 75%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #555;
+}
+
+.input_plural input.pluralBtn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 5px;
+  padding: 0;
+  margin: 0;
+}
+
+.slider {
+  position: absolute;
+  margin-top: -20%;
+  margin-left: 10%;
+  padding: 1vw;
+  width: 47%;
+  height: 31vw;
+  float: left;
+}
+.slider img {
+  height: 23vw;
+  width: auto;
+  object-fit: cover;
+  margin: auto;
+  margin-top: 2vw;
+}
+/*slick setting*/
+.slick-prev:before,
+.slick-next:before {
+  color: #000;
+}
+
+.image-detail ul {
+  position: relative;
+  bottom: auto;
+  box-shadow: none;
 }

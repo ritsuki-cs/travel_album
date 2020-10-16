@@ -21,11 +21,17 @@
 </nav>
 <main>
   <div class="image-detail">
-    <img src="<%= Image.find_by(contribute_id: params[:id]).image %>" alt="投稿の画像" width="600" height="500">
+    <% images = Image.where(contribute_id: params[:id]) %>
+    <ul class="slider">
+      <% images.each do |image|%>
+        <li><img src="<%= image.image %>" alt="投稿の画像"></li>
+      <% end %>
+    </ul>
     <div class="pin-big">　</div>
+    <div class="pin-big2">　</div>
   </div>
   <div class="blank"></div>
-  <div id='map'></div>
+  <div id='map' class="map"></div>
 
   <div class="comment">
     <p>投稿者：<a href="/home/<%= @contribute.user_id %>"><img class="acount-image" src="<%= User.find_by(id: @contribute.user_id).image %>" width="40" height="40"></a>　<%= User.find_by(id: @contribute.user_id).name %></a></p>
@@ -34,6 +40,10 @@
     <p>ジャンル：<%= Type.find_by(id: @contribute.type_id).name %></p>
     <p>内容：<%= @contribute.comment %></p>
   </div>
+
+
+  <button class="edit"><a href="/edit/<%= params[:id] %>">編集</a></button>
+  <button class="delete"><a href="/delete/<%= params[:id] %>">削除</a></button>
 
   <style>
   #map {
@@ -73,5 +83,14 @@
   }
 
 }
+  </script>
+
+  <%# slick %>
+  <script>
+  $('.slider').slick({
+    autoplay:false,
+    autoplaySpeed:5000,
+    dots:true,
+  });
   </script>
 </main>

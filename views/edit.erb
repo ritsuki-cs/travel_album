@@ -25,31 +25,30 @@
     <div class="husen-form-middle">
       <form action="/new" method="post" enctype="multipart/form-data" class="form-new">
         <div id="input_pluralBox">
-          <div class="input_plural">
-            <input type="file" type="file" name="1">
+          <div id="input_plural">
+            <input type="file" type="file" id="image" name="">
+            <input type="button" value="＋" class="add-image pluralBtn">
+            <input type="button" value="－" class="del pluralBtn">
           </div>
         </div>
-        <input type="button" value="＋" class="add-image pluralBtn">
-        <input type="button" value="－" class="del pluralBtn">
         <%# <input class="file" type="file" name="image"><br> %>
 
         <select name="prefecture" class="custom-select d-block w-100">
           <option value="">都道府県を選択してください</option>
           <% @prefectures.each do |prefecture| %>
-            <option value="<%= prefecture.id %>"><%= prefecture.prefecture %></option>
+            <option value="<%= prefecture.id %>" <% if prefecture.id == Contribute.find_by(id: params[:id]).prefecture_id %>selected<% end %>><%= prefecture.prefecture %></option>
           <% end %>
         </select><br>
         <select name="type" class="custom-select d-block w-100">
           <option value="">ジャンルを選択してください</option>
           <% @types.each do |type| %>
-            <option value="<%= type.id %>"><%= type.name %></option>
+            <option value="<%= type.id %>" <% if type.id == Contribute.find_by(id: params[:id]).type_id %>selected<% end %>><%= type.name %></option>
           <% end %>
         </select><br>
         <textarea name="comment" id="" cols="40" rows="10"></textarea>
         <input type="hidden" value="" id="lat" name="lat">
         <input type="hidden" value="" id="lng" name="lng">
         <input type="hidden" value="" id="name" name="name">
-        <input type="hidden" value="" id="count" name="count">
         <input type="submit" value="登録">
       </form>
     </div>
@@ -153,26 +152,13 @@
 
 <%# 画像複数選択ボタン %>
 <script type="text/javascript">
-let num;
-
 $(document).on("click", ".add-image", function() {
-  // 追加するフォーム
-  num = Number($(".input_plural").last().children().attr('name')) + 1;
-  $( "<div/>", {
-    "class": "input_plural",
-    html: `<input type="file" type="file" name="${num}">`,
-  }).insertAfter($(".input_plural").last());
-
-  document.getElementById("count").value = num;
-
+    $(this).parent().clone(true).insertAfter($(this).parent());
 });
 $(document).on("click", ".del", function() {
-    var target = $(".input_plural").last();
-    if (target.children().attr('name') != "1") {
+    var target = $(this).parent();
+    if (target.parent().children().length > 1) {
         target.remove();
-        num -= 1;
     }
-
-    document.getElementById("count").value = num;
 });
 </script>

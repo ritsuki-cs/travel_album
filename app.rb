@@ -111,27 +111,32 @@ get '/new' do
 end
 
 post '/new' do
-  if params[:image]
-    image = params[:image][:tempfile]
-    upload = Cloudinary::Uploader.upload(image.path)
-    img_url = upload['url']
-  end
 
-  Contribute.create!(
+  contribute = Contribute.create!(
     prefecture_id: params[:prefecture],
     type_id: params[:type],
     comment: params[:comment],
     user_id: current_user.id
   )
-  Image.create!(
-    image: img_url,
-    contribute_id: Contribute.last.id
-  )
+
+  for i in 1..params[:count].to_i
+    if params[i.to_s]
+      image = params[i.to_s][:tempfile]
+      upload = Cloudinary::Uploader.upload(image.path)
+      img_url = upload['url']
+
+      Image.create!(
+      image: img_url,
+      contribute_id: contribute.id
+      )
+    end
+  end
+
   Place.create!(
     lat: params[:lat],
     lng: params[:lng],
     name: params[:name],
-    contribute_id: Contribute.last.id
+    contribute_id: contribute.id
   )
   redirect '/'
 end
